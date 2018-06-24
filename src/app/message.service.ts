@@ -8,9 +8,14 @@ export class MessageService {
     this.messages.push(message);
   }
 
-  clear() {
-    if(confirm('Are you sure you want to clear all messages?')) {
-      this.messages = [];
+  clear(count) {
+    if(confirm('Are you sure you want to delete messages?')) {
+      if(count){
+        this.messages.splice(0, count);
+      }
+      else {
+        this.messages = [];
+      }
     }
   }
 }

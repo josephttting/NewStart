@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
+
 import { MessageService } from '../app/message.service';
+import { HeroService } from '../app/hero.service';
+
+import { Hero } from '../app/hero';
 
 @Component({
   selector: 'app-root',
@@ -7,7 +11,11 @@ import { MessageService } from '../app/message.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  constructor(public messageService: MessageService) {}
+  
+  constructor(public messageService: MessageService, private heroService: HeroService) {
 
+  }
+
+  heroes: Hero[];
   title = 'Tour of Heroes';
 }

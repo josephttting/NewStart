@@ -9,10 +9,23 @@ import { HeroService } from '../hero.service';
   styleUrls: ['./heroes.component.css']
 })
 export class HeroesComponent implements OnInit {
-  heroes: Hero[];
+  
+  private _heroes: Hero[];
+  public heroCount: Number;
 
   constructor(private heroService: HeroService) { }
 
+  get heroes() {
+    if (!this._heroes) {
+      this._heroes = [];
+    }
+    return this._heroes;
+  }
+  set heroes(heores: Hero[]) {
+    this._heroes = heores;
+    this.updateHeroCount();
+  }
+  
   ngOnInit() {
     this.getHeroes();
   }
@@ -28,6 +41,7 @@ export class HeroesComponent implements OnInit {
     this.heroService.addHero({ name } as Hero)
       .subscribe(hero => {
         this.heroes.push(hero);
+        this.updateHeroCount();
       });
   }
 
@@ -36,4 +50,13 @@ export class HeroesComponent implements OnInit {
     this.heroService.deleteHero(hero).subscribe();
   }
 
+  updateHeroCount() {
+    if(this.heroes) {
+      this.heroCount = this.heroes.length;
+    }
+    else {
+      this.heroCount = 0;
+    }
+    this.heroService.heroCount$.next(this.heroCount);
+  }
 }

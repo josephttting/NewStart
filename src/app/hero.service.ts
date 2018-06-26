@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { catchError, map, tap } from 'rxjs/operators';
+import { Subject} from 'rxjs/subject';
 
 import { Hero } from './hero';
 import { MessageService } from './message.service';
@@ -16,6 +17,7 @@ const httpOptions = {
 export class HeroService {
 
   private heroesUrl = 'api/heroes';  // URL to web api
+  public heroCount$ = new Subject<Number>();
 
   constructor(
     private http: HttpClient,

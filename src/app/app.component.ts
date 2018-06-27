@@ -12,7 +12,7 @@ import { Hero } from '../app/hero';
 })
 export class AppComponent {
   
-  constructor(public messageService: MessageService, private heroService: HeroService) {
+  constructor(public messageService: MessageService, public heroService: HeroService) {
 
   }
 
